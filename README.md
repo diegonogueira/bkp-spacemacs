@@ -1,6 +1,7 @@
 # Install
 
 ```
+brew install the_silver_searcher
 brew install --with-cocoa  emacs
 brew cask install emacs
 
