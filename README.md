@@ -4,6 +4,7 @@
 brew install the_silver_searcher
 brew tap d12frosted/emacs-plus
 brew install emacs-plus
+brew linkapps emacs-plus
 
 cd ~/.emacs.d/private/
 git init
