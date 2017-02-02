@@ -2,8 +2,8 @@
 
 ```
 brew install the_silver_searcher
-brew install --with-cocoa  emacs
-brew cask install emacs
+brew tap d12frosted/emacs-plus
+brew install emacs-plus
 
 cd ~/.emacs.d/private/
 git init
