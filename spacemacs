@@ -309,6 +309,7 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (setq powerline-default-separator nil) ;; Remove separator bar
   (setq helm-buffer-max-length nil)      ;; Remove filename max limit column on helm buffer
+  (setq projectile-enable-caching t)     ;; Enable projectile cache
   (global-evil-mc-mode  1)               ;; Habilita o evil-mc-mode para todos os buffers
   ;; (add-hook 'hack-local-variables-hook (lambda () (setq truncate-lines t)))
   ;;(setq projectile-switch-project-action 'neotree-show) ;; Open neotree after switch project
