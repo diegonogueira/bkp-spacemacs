@@ -6,7 +6,12 @@
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
 values."
+<<<<<<< HEAD
   (setq-default ;; Base distribution to use. This is a layer contained in the directory
+=======
+  (setq-default
+   ;; Base distribution to use. This is a layer contained in the directory
+>>>>>>> bfc9dcc... initial commit
    ;; `+distribution'. For now available distributions are `spacemacs-base'
    ;; or `spacemacs'. (default 'spacemacs)
    dotspacemacs-distribution 'spacemacs
@@ -30,8 +35,11 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+<<<<<<< HEAD
      vimscript
      yaml
+=======
+>>>>>>> bfc9dcc... initial commit
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -45,6 +53,7 @@ values."
                       auto-completion-tab-key-behavior 'complete)
      better-defaults
      emacs-lisp
+<<<<<<< HEAD
      git
      markdown
      org
@@ -53,15 +62,33 @@ values."
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
+=======
+     elixir
+     ruby
+     javascript
+     git
+     markdown
+     org
+     dash
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
+     (osx :variables
+          osx-use-option-as-meta nil)
+     ;; spell-checking
+>>>>>>> bfc9dcc... initial commit
      syntax-checking
      (version-control :variables
                       version-control-diff-side 'left)
      doom-themes
+<<<<<<< HEAD
      html
      elixir
      ruby
      javascript
      dash
+=======
+>>>>>>> bfc9dcc... initial commit
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -145,7 +172,11 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Monaco"
+<<<<<<< HEAD
                                :size 15
+=======
+                               :size 16
+>>>>>>> bfc9dcc... initial commit
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -239,7 +270,11 @@ values."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
+<<<<<<< HEAD
    dotspacemacs-maximized-at-startup t
+=======
+   dotspacemacs-maximized-at-startup nil
+>>>>>>> bfc9dcc... initial commit
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -285,7 +320,11 @@ values."
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
+<<<<<<< HEAD
    dotspacemacs-highlight-delimiters nil
+=======
+   dotspacemacs-highlight-delimiters 'all
+>>>>>>> bfc9dcc... initial commit
    ;; If non nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
    dotspacemacs-persistent-server nil
@@ -303,6 +342,7 @@ values."
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup 'trailing
+<<<<<<< HEAD
 
    js2-basic-offset 2
    js-indent-level 2
@@ -311,6 +351,53 @@ values."
    web-mode-enable-auto-indentation nil
    ))
 
+=======
+   ))
+
+;; Restore window size and position
+;; https://gist.github.com/synic/0357fdc2dcc777d89d1e
+(defun save-framegeometry ()
+  "Gets the current frame's geometry and saves to ~/.emacs.d/framegeometry."
+  (let (
+        (framegeometry-left (frame-parameter (selected-frame) 'left))
+        (framegeometry-top (frame-parameter (selected-frame) 'top))
+        (framegeometry-width (frame-parameter (selected-frame) 'width))
+        (framegeometry-height (frame-parameter (selected-frame) 'height))
+        (framegeometry-file (expand-file-name "~/.emacs.d/framegeometry"))
+        )
+
+    (when (not (number-or-marker-p framegeometry-left))
+      (setq framegeometry-left 0))
+    (when (not (number-or-marker-p framegeometry-top))
+      (setq framegeometry-top 0))
+    (when (not (number-or-marker-p framegeometry-width))
+      (setq framegeometry-width 0))
+    (when (not (number-or-marker-p framegeometry-height))
+      (setq framegeometry-height 0))
+
+    (with-temp-buffer
+      (insert
+       ";;; This is the previous emacs frame's geometry.\n"
+       ";;; Last generated " (current-time-string) ".\n"
+       "(setq initial-frame-alist\n"
+       "      '(\n"
+       (format "        (top . %d)\n" (max framegeometry-top 0))
+       (format "        (left . %d)\n" (max framegeometry-left 0))
+       (format "        (width . %d)\n" (max framegeometry-width 0))
+       (format "        (height . %d)))\n" (max framegeometry-height 0)))
+      (when (file-writable-p framegeometry-file)
+        (write-file framegeometry-file))))
+  )
+
+(defun load-framegeometry ()
+  "Loads ~/.emacs.d/framegeometry which should load the previous frame's
+geometry."
+  (let ((framegeometry-file (expand-file-name "~/.emacs.d/framegeometry")))
+    (when (file-readable-p framegeometry-file)
+      (load-file framegeometry-file)))
+  )
+
+>>>>>>> bfc9dcc... initial commit
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init', before layer configuration
@@ -318,11 +405,24 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+<<<<<<< HEAD
   ;; https://github.com/syl20bnr/spacemacs/issues/3920#issuecomment-284208619
   (setq exec-path-from-shell-check-startup-files nil)
 
   ;; https://github.com/syl20bnr/spacemacs/issues/7475#issuecomment-255189457
   (setq evil-search-module 'evil-search)
+=======
+
+  ;; https://github.com/syl20bnr/spacemacs/issues/7475#issuecomment-255189457
+  (setq evil-search-module 'evil-search)
+
+  ;; Restore Frame size and location, if we are using gui emacs
+  (if window-system
+      (progn
+        (add-hook 'after-init-hook 'load-framegeometry)
+        (add-hook 'kill-emacs-hook 'save-framegeometry))
+    )
+>>>>>>> bfc9dcc... initial commit
   )
 
 (defun dotspacemacs/user-config ()
@@ -332,9 +432,16 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+<<<<<<< HEAD
   ;; Remove separator bar
   (setq powerline-default-separator 'slant)
   (setq powerline-image-apple-rgb t)
+=======
+
+  ;; Remove separator bar
+  (setq powerline-default-separator 'slant)
+  ;; (setq powerline-image-apple-rgb t)
+>>>>>>> bfc9dcc... initial commit
 
   ;; no wrap
   (add-hook 'hack-local-variables-hook (lambda () (setq truncate-lines t)))
@@ -343,7 +450,11 @@ you should place your code here."
   (setq helm-buffer-max-length nil)
 
   ;; Enable projectile cache
+<<<<<<< HEAD
   (setq projectile-enable-caching t)
+=======
+  ;; (setq projectile-enable-caching t)
+>>>>>>> bfc9dcc... initial commit
 
   ;; Enable 'w' navigate trought camelcase
   (spacemacs/toggle-camel-case-motion-globally-on)
@@ -352,7 +463,11 @@ you should place your code here."
   (setq-default line-spacing 3)
 
   ;; Habilita o evil-mc-mode para todos os buffers
+<<<<<<< HEAD
   (global-evil-mc-mode  1)
+=======
+  (global-evil-mc-mode 1)
+>>>>>>> bfc9dcc... initial commit
 
   ;; Enable company-mode globally
   (global-company-mode t)
@@ -362,6 +477,7 @@ you should place your code here."
   ;; Disable lock files #.file
   (setq create-lockfiles nil)
 
+<<<<<<< HEAD
   ;; Disable auto highlight smartparens
   (with-eval-after-load 'smartparens
     (show-smartparens-global-mode -1))
@@ -369,6 +485,17 @@ you should place your code here."
   ;; https://github.com/jaypei/emacs-neotree/issues/226#issuecomment-374200336
   (setq helm-split-window-inside-p t)
 
+=======
+  ;; Disable highlight current line
+  (global-hl-line-mode -1)
+
+  ;; Disable auto highlight smartparens
+  ;; (with-eval-after-load 'smartparens
+  ;;   (show-smartparens-global-mode -1))
+
+  ;; https://github.com/jaypei/emacs-neotree/issues/226#issuecomment-374200336
+  ;; (setq helm-split-window-inside-p t)
+>>>>>>> bfc9dcc... initial commit
   ;; Customize nova theme
   (custom-theme-set-faces
    'doom-nova
@@ -399,6 +526,7 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+<<<<<<< HEAD
  '(custom-safe-themes
    (quote
     ("a866134130e4393c0cad0b4f1a5b0dd580584d9cf921617eee3fd54b6f09ac37" default)))
@@ -408,6 +536,11 @@ you should place your code here."
 (setq ac-auto-start t)
 (setq ac-delay 0)
 (setq ac-show-menu-immediately-on-auto-complete t)
+=======
+ '(package-selected-packages
+   (quote
+    (web-beautify rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder rbenv rake pbcopy osx-trash osx-dictionary minitest livid-mode skewer-mode simple-httpd launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc helm-dash dash-at-point company-tern dash-functional tern coffee-mode chruby bundler inf-ruby doom-city-lights-theme doom-nord-theme spacemacs-nova-theme xterm-color unfill smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip evil-magit magit magit-popup git-commit ghub treepy graphql with-editor eshell-z eshell-prompt-extras esh-help diff-hl company-statistics auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete ob-elixir flycheck-mix flycheck-credo flycheck alchemist company elixir-mode helm-core ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
+>>>>>>> bfc9dcc... initial commit
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

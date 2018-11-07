@@ -4,4 +4,8 @@
 # --
 IO.puts "=============="
 IO.inspect $0
+<<<<<<< HEAD
 IO.puts "=============="
+=======
+IO.puts "=============="
+>>>>>>> bfc9dcc... initial commit
