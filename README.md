@@ -1,16 +1,21 @@
-# Install
+# Private directory
 
-```
-brew install the_silver_searcher
-brew tap d12frosted/emacs-plus
-brew install emacs-plus
-brew linkapps emacs-plus
+The content of this directory is ignored by Git. This is the default place
+where to store your private configuration layers.
 
-git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-cd ~/.emacs.d/private/
-rm -rf *
-git init
-git remote add origin git@github.com:diegonogueira/spacemacs.git
-git pull origin master
-ln -sf ~/.emacs.d/private/spacemacs ~/.spacemacs
-```
+To create a new configuration layer:
+
+    SPC SPC configuration-layer/create-layer RET
+
+Then enter the name of your configuration in the prompt.
+
+A directory named after the created configuration layer will be created here
+along with template files within it (packages.el and extensions.el, more info
+on the meaning of those files can be found in the [documentation][conf_layers]).
+
+Each created file has further guidance written in them.
+
+Once the configuration is done, restart Emacs to load, install and configure
+your layer.
+
+[conf_layers]: https://github.com/syl20bnr/spacemacs/blob/master/doc/DOCUMENTATION.org#extensions-and-packages
