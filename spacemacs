@@ -36,16 +36,20 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     doom-themes
      helm
      (auto-completion :variables
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-complete-with-key-sequence-delay 0
-                      auto-completion-private-snippets-directory nil
+                      ;; auto-completion-private-snippets-directory nil
                       auto-completion-tab-key-behavior 'complete)
      better-defaults
      emacs-lisp
      elixir
      ruby
+     csv
+     html
+     yaml
      javascript
      git
      markdown
@@ -60,7 +64,6 @@ values."
      syntax-checking
      (version-control :variables
                       version-control-diff-side 'left)
-     doom-themes
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -138,7 +141,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(doom-nova)
+   dotspacemacs-themes '(zenburn)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -385,7 +388,7 @@ you should place your code here."
   (setq helm-buffer-max-length nil)
 
   ;; Enable projectile cache
-  ;; (setq projectile-enable-caching t)
+  (setq projectile-enable-caching t)
 
   ;; Enable 'w' navigate trought camelcase
   (spacemacs/toggle-camel-case-motion-globally-on)
@@ -412,28 +415,29 @@ you should place your code here."
   ;;   (show-smartparens-global-mode -1))
 
   ;; https://github.com/jaypei/emacs-neotree/issues/226#issuecomment-374200336
-  ;; (setq helm-split-window-inside-p t)
+  (setq helm-split-window-inside-p t)
+
   ;; Customize nova theme
-  (custom-theme-set-faces
-   'doom-nova
-   '(mode-line ((t (:background "#556873"))))
-   '(mode-line-inactive ((t (:inherit mode-line))))
-   '(hl-line ((t (:background "#556873"))))
-   '(region ((t (:background "#7FC1CA" :foreground "#3C4C55"))))
-   '(company-tooltip-selection ((t (:background "#556873"))))
-   '(font-lock-type-face ((t (:foreground "#A8CE93"))))
-   '(elixir-atom-face ((t (:inherit font-lock-string-face))))
-   '(helm-source-header ((t (:inherit info-title-2))))
-   '(helm-selection ((t (:inherit hl-line))))
-   '(helm-buffer-not-saved ((t (:inherit error))))
-   '(helm-buffer-process ((t (:inherit helm-buffer-size))))
-   '(evil-ex-info ((t (:inherit error))))
-   '(powerline-active0 ((t (:background "#899BA6"))))
-   '(powerline-active1 ((t (:background "#6A7D89"))))
-   '(powerline-active2 ((t (:inherit mode-line))))
-   '(powerline-inactive0 ((t (:inherit powerline-active0))))
-   '(powerline-inactive1 ((t (:inherit powerline-active1))))
-   '(powerline-inactive2 ((t (:inherit powerline-active2)))))
+  ;; (custom-theme-set-faces
+  ;;  'doom-nova
+  ;;  '(mode-line ((t (:background "#556873"))))
+  ;;  '(mode-line-inactive ((t (:inherit mode-line))))
+  ;;  '(hl-line ((t (:background "#556873"))))
+  ;;  '(region ((t (:background "#7FC1CA" :foreground "#3C4C55"))))
+  ;;  '(company-tooltip-selection ((t (:background "#556873"))))
+  ;;  '(font-lock-type-face ((t (:foreground "#A8CE93"))))
+  ;;  '(elixir-atom-face ((t (:inherit font-lock-string-face))))
+  ;;  '(helm-source-header ((t (:inherit info-title-2))))
+  ;;  '(helm-selection ((t (:inherit hl-line))))
+  ;;  '(helm-buffer-not-saved ((t (:inherit error))))
+  ;;  '(helm-buffer-process ((t (:inherit helm-buffer-size))))
+  ;;  '(evil-ex-info ((t (:inherit error))))
+  ;;  '(powerline-active0 ((t (:background "#899BA6"))))
+  ;;  '(powerline-active1 ((t (:background "#6A7D89"))))
+  ;;  '(powerline-active2 ((t (:inherit mode-line))))
+  ;;  '(powerline-inactive0 ((t (:inherit powerline-active0))))
+  ;;  '(powerline-inactive1 ((t (:inherit powerline-active1))))
+  ;;  '(powerline-inactive2 ((t (:inherit powerline-active2)))))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -443,9 +447,11 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
  '(package-selected-packages
    (quote
-    (web-beautify rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder rbenv rake pbcopy osx-trash osx-dictionary minitest livid-mode skewer-mode simple-httpd launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc helm-dash dash-at-point company-tern dash-functional tern coffee-mode chruby bundler inf-ruby doom-city-lights-theme doom-nord-theme spacemacs-nova-theme xterm-color unfill smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip evil-magit magit magit-popup git-commit ghub treepy graphql with-editor eshell-z eshell-prompt-extras esh-help diff-hl company-statistics auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete ob-elixir flycheck-mix flycheck-credo flycheck alchemist company elixir-mode helm-core ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
+    (yaml-mode csv-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder rbenv rake pbcopy osx-trash osx-dictionary minitest livid-mode skewer-mode simple-httpd launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc helm-dash dash-at-point company-tern dash-functional tern coffee-mode chruby bundler inf-ruby doom-city-lights-theme doom-nord-theme spacemacs-nova-theme xterm-color unfill smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip evil-magit magit magit-popup git-commit ghub treepy graphql with-editor eshell-z eshell-prompt-extras esh-help diff-hl company-statistics auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete ob-elixir flycheck-mix flycheck-credo flycheck alchemist company elixir-mode helm-core ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
