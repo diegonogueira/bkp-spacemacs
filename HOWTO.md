@@ -7,6 +7,8 @@ brew install emacs-plus
 
 brew linkapps emacs-plus
 
+ln -s /usr/local/opt/emacs-plus/Emacs.app /Applications
+
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
 cd ~/.emacs.d/private/
